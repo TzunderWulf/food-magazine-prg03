@@ -27,7 +27,9 @@ function showRecipe(e) {
     
     // make sure it is a button and belong to right class
     if (e.target.nodeName !== "BUTTON" || e.target.classList.contains("recipe-btn") === false) {
+
         return;
+        
     }
 
     let listOfRecipes = ["Put it in the oven and go!", "Cheesy Macaroni, straight out of the oven!", "Available for self-cooking or as an instant.", "Everytime in the city after midnight",
