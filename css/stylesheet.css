@@ -46,7 +46,7 @@ aside {
     margin: 10px 0;
 }
 
-.recipes {
+#recipes {
     width: auto;
 
     display: flex;
