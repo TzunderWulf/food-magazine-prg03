@@ -44,25 +44,9 @@ function showRecipe(e) {
     let tags = ['cheese, oven', 'cheese, oven, mac', 'omnomnom, noodles, instant', 'kapsalon, tasty, meat', 'fish, rice', 'fish, seaweed, food', 
     'meat, fresh vegetables, pork, chicken', 'omnomnom, cheese, oven', 'bread, potato, tasty, meat', "pancake, savory, sweet",]
 
-    //let detailView = document.getElementById('detail-view');
+    let detailView = document.getElementById('detail-view');
 
-    // selecting all elements
-    // both divs for recipe and tags
-    let recipeDiv = document.getElementById('recipe-dish');
-    let tagsDiv = document.getElementById('dish-tags');
-
-    // both headers 1 for recipe and tags
-    let recipeHeader = document.getElementById('recipe-header');
-    let recipeText = document.getElementById('recipe-text');
-
-    // both headers 2 for recipe and tags
-    let tagsHeader = document.getElementById('tags-header');
-    let tagsText = document.getElementById('tags-text');
-
-    // fill in the right info
-    recipeHeader.innerHTML = "Recipe";
-    recipeText.innerHTML = listOfRecipes[btnIndex];
-    tagsHeader.innerHTML = "Related tags";
-    tagsText.innerHTML = tags[btnIndex];
+    // temporary js
+    detailView.innerHTML = `Recipe<br>${listOfRecipes[btnIndex]}<br>Tags<br>${tags[btnIndex]}`;
 
 }
