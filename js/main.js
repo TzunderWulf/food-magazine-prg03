@@ -36,17 +36,53 @@ function showRecipe(e) {
     // get button and id of button for the right info
     let btn = e.target;
     let btnIndex = btn.dataset.index;
+    
+    let listOfRecipes = [
+        {   
+            description: 'Put it in the oven and go!',
+            tags: 'cheese, oven'
+        },
+        {
+            description: 'Cheesy Macaroni, straight out of the oven!',
+            tags: 'cheese, oven, mac'
+        },
+        {
+            description: "Available for self-cooking or as an instant.",
+            tags: 'omnomnom, noodles, instant'
+        },
+        {
+            description: "Everytime in the city after midnight",
+            tags: 'kapsalon, tasty, meat'
+        },
+        {
+            description: "Specialty when on holiday in Spain",
+            tags: 'fish, rice'
+        },
+        {   
+            description: "Order or make it yourself!",
+            tags: 'fish, seaweed, food'
+        },
+        {
+            description: "Meat (pork or chicken) served with potato, onion, tomato, tzatziki or yogurt!",
+            tags: 'meat, fresh vegetables, pork, chicken'
+        },
+        {
+            description: "Straight out of heaven.",
+            tags: 'omnomnom, cheese, oven'
+        },
+        {
+            description: "Famous in Berlin, lovely to eat.",
+            tags: 'bread, potato, tasty, meat'
+        },
+        {
+            description: "Цыка блять, советы идут",
+            tags: "pancake, savory, sweet"
+        }
+    ]
 
-    let listOfRecipes = ["Put it in the oven and go!", "Cheesy Macaroni, straight out of the oven!", "Available for self-cooking or as an instant.", "Everytime in the city after midnight",
-    "Specialty when on holiday in Spain", "Order or make it yourself!", "Meat (pork or chicken) served with potato, onion, tomato, tzatziki or yogurt!", "Straight out of heaven.",
-    "Famous in Berlin, lovely to eat.", "Цыка блять, советы идут"];
-
-    let tags = ['cheese, oven', 'cheese, oven, mac', 'omnomnom, noodles, instant', 'kapsalon, tasty, meat', 'fish, rice', 'fish, seaweed, food', 
-    'meat, fresh vegetables, pork, chicken', 'omnomnom, cheese, oven', 'bread, potato, tasty, meat', "pancake, savory, sweet",]
-
-    let detailView = document.getElementById('detail-view');
-
-    // temporary js
-    detailView.innerHTML = `Recipe<br>${listOfRecipes[btnIndex]}<br>Tags<br>${tags[btnIndex]}`;
+    let recipeText = document.getElementById('recipe');
+    let tagsText = document.getElementById('tags');
+    recipeText.innerHTML = `${listOfRecipes[btnIndex].description}`;
+    tagsText.innerHTML = `${listOfRecipes[btnIndex].tags}`;
 
 }
