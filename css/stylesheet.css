@@ -29,11 +29,20 @@ main {
 
 #detail-view {
     background-color: #e6e6e6;
-
+    flex-grow: 1;
     height: 1000px;
-    width: 300px;
+
+    padding: 10px 20px;
 
     margin: 10px 0;
+}
+
+#recipe, #tags {
+    font-family: sans-serif;
+}
+
+h2 {
+    font-size: 2em;
 }
 
 #recipes {
@@ -83,18 +92,16 @@ main {
 @media (max-width: 720px) {
     main {
         flex-direction: column;
+        align-items: center;
+        padding: 10px;
     }
 
     #detail-view {
         height: 200px;
-        margin: 20px auto;
+        width: 80%;
     }
 
     #recipes {
         margin-bottom: 0;
-    }
-
-    .recipe {
-        margin: 10px;
     }
 }
