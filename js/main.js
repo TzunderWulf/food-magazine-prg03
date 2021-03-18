@@ -47,42 +47,42 @@ function showRecipe(e) {
             tags: 'cheese, oven, mac'
         },
         {
-            description: "Available for self-cooking or as an instant.",
+            description: 'Available for self-cooking or as an instant.',
             tags: 'omnomnom, noodles, instant'
         },
         {
-            description: "Everytime in the city after midnight",
+            description: 'Everytime in the city after midnight',
             tags: 'kapsalon, tasty, meat'
         },
         {
-            description: "Specialty when on holiday in Spain",
+            description: 'Specialty when on holiday in Spain',
             tags: 'fish, rice'
         },
         {   
-            description: "Order or make it yourself!",
+            description: 'Order or make it yourself!',
             tags: 'fish, seaweed, food'
         },
         {
-            description: "Meat (pork or chicken) served with potato, onion, tomato, tzatziki or yogurt!",
+            description: 'Meat (pork or chicken) served with potato, onion, tomato, tzatziki or yogurt!',
             tags: 'meat, fresh vegetables, pork, chicken'
         },
         {
-            description: "Straight out of heaven.",
+            description: 'Straight out of heaven.',
             tags: 'omnomnom, cheese, oven'
         },
         {
-            description: "Famous in Berlin, lovely to eat.",
+            description: 'Famous in Berlin, lovely to eat.',
             tags: 'bread, potato, tasty, meat'
         },
         {
-            description: "Цыка блять, советы идут",
-            tags: "pancake, savory, sweet"
+            description: 'Цыка блять, советы идут',
+            tags: 'pancake, savory, sweet'
         }
     ]
 
     let recipeText = document.getElementById('recipe');
     let tagsText = document.getElementById('tags');
-    recipeText.innerHTML = `${listOfRecipes[btnIndex].description}`;
-    tagsText.innerHTML = `${listOfRecipes[btnIndex].tags}`;
+    recipeText.innerHTML = listOfRecipes[btnIndex].description;
+    tagsText.innerHTML = listOfRecipes[btnIndex].tags;
 
 }
