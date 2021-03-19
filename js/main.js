@@ -116,6 +116,17 @@ function showRecipe(e) {
 }
 
 function addFavorite(e) {
-    
+    console.log("favorite")
+
+    let recipeDiv = e.target.parentNode;
+    recipeDiv.classList.add('favorite-recipe');
+
+    let btn = e.target;
+    let btnIndex = btn.dataset.index;
+    console.log(e.target.dataset.index)
+
+    favorites.push(btnIndex);
+
+    localStorage.setItem('favorites', JSON.stringify(favorites));
 }
 
