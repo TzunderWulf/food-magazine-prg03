@@ -103,10 +103,25 @@ h2 {
     }
 
     #detail-view {
-        height: 200px;
+        height: fit-content;
         width: 80%;
     }
 
+    #recipes {
+        margin-bottom: 0;
+    }
+}
+
+@media (max-width: 1023px) {
+    main {
+        flex-direction: column;
+        align-items: center;
+        padding: 10px;
+    }
+    #detail-view {
+        height: fit-content;
+        width: 80%;
+    }
     #recipes {
         margin-bottom: 0;
     }

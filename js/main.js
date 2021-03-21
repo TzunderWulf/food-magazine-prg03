@@ -1,10 +1,10 @@
 window.addEventListener('load', init);
 
-// global variables
-let recipesSection;
-let buttonsRecipe;
-let buttonsFavorite;
-let currentClickedRecipe;
+let btn;
+let btnIndex;
+let recipeDiv;
+let storedString;
+let storedData
 let listOfRecipes = [
     {   
         description: 'Put it in the oven and go!',
@@ -50,83 +50,92 @@ let listOfRecipes = [
 let favorites = [];
 
 function init() {
-
-    // Get entire section with all recipes
-    recipesSection = document.getElementById('recipes');
+    let recipesSection = document.getElementById('recipes');
     recipesSection.addEventListener('click', clickHandler);
 
-    // Get all the buttons with classname
-    buttonsRecipe = document.getElementsByClassName('recipe-btn');
-    toggleFavorites = document.getElementsByClassName('favorite-btn');
+    let buttonsRecipes = document.getElementsByClassName('recipe-btn');
+    let toggleFavorites = document.getElementsByClassName('favorite-btn');
 
-    // Add an index to each button (for later usage to show recipe)
-    for (let i = 0; i < buttonsRecipe.length; i++) {
-        buttonsRecipe[i].dataset.index = i.toString();
-    }
-
-    // Add an index to each button (for later usage to add and delete
-    // favorites)
-    for (let i = 0; i < buttonsRecipe.length; i++) {
+    // We can use the same for loop for both elements, every recipe
+    // will always have to have two buttons
+    for (let i = 0; i < buttonsRecipes.length; i++) {
+        buttonsRecipes[i].dataset.index = i.toString();
         toggleFavorites[i].dataset.index = i.toString();
     }
 
-}
+    storedString = localStorage.getItem('favorites');
 
-// Function to check what function has to be executed
-function clickHandler(e) {
-
-    if (e.target.nodeName !== "BUTTON") {
-        
-        return
-
-    } else if (e.target.classList.contains("recipe-btn") === true) {
-
-        showRecipe(e);
-
-    } else if (e.target.classList.contains("favorite-btn") === true) {
-
-        addFavorite(e);
-
-    } else {
-        
-        /*  
-            In case there is more buttons, which do not have either of these classes.
-            You could argue a bit unnessecary, but in case we would want to add more
-            buttons, you wouldn't have to worry about it executing a wrong function.
-        */
-        return;
-
+    if (storedString != undefined) {
+        storedData = JSON.parse(storedString);
+        for (let favorite of storedData) {
+            fillFromStorage(favorite);
+        }
     }
-
 }
 
-function showRecipe(e) { 
-    console.log("recipe")
-
-    // Get button and id of button for the right info
-    let btn = e.target;
-    let btnIndex = btn.dataset.index;
-    console.log(btnIndex)
-    
-    let recipeText = document.getElementById('recipe');
-    let tagsText = document.getElementById('tags');
-    recipeText.innerHTML = listOfRecipes[btnIndex].description;
-    tagsText.innerHTML = listOfRecipes[btnIndex].tags;
-
+// clickHandler, to make sure what function has to be executed
+function clickHandler(e) {
+    if (e.target.nodeName !== 'BUTTON') {
+        return;
+    } else if (e.target.classList.contains('recipe-btn')) {
+        showRecipe(e);
+    } else if (e.target.classList.contains('favorite-btn')) {
+        if (e.target.parentNode.classList.contains('favorite-recipe')) {
+            deleteFavorite(e);
+        } else {
+            addFavorite(e);
+        }
+    } else {
+        // In case there is more buttons, which do not have either classes.
+        return
+    }
 }
 
+// showRecipe, shows the recipe and tags in detailview
+function showRecipe(e) {
+    // Get the button and id, for the right information
+    btn = e.target;
+    btnIndex = btn.dataset.index;
+
+    let recipe = document.getElementById('recipe');
+    let tags = document.getElementById('tags');
+    recipe.innerHTML = listOfRecipes[btnIndex].description;
+    tags.innerHTML = listOfRecipes[btnIndex].tags;
+}
+
+// addFavorite, add class and to localstorage
 function addFavorite(e) {
-    console.log("favorite")
-
-    let recipeDiv = e.target.parentNode;
+    btn = e.target;
+    btnIndex = btn.dataset.index;
+    recipeDiv = btn.parentNode;
     recipeDiv.classList.add('favorite-recipe');
 
-    let btn = e.target;
-    let btnIndex = btn.dataset.index;
-    console.log(e.target.dataset.index)
-
     favorites.push(btnIndex);
-
     localStorage.setItem('favorites', JSON.stringify(favorites));
 }
 
+// deleteFavorite, remove class and from localstorage
+function deleteFavorite(e) {
+    btn = e.target;
+    btnIndex = btn.dataset.index;
+    recipeDiv = btn.parentNode;
+    recipeDiv.classList.remove('favorite-recipe');
+
+    // get item
+    // parse list from localstorage
+    // remove item with slice
+    // remake json
+    // set item
+}
+
+// fillFromStorage, fill in from the localstorage
+function fillFromStorage(index) {
+    let recipeDivs = document.getElementsByClassName('recipe');
+
+    for (let i = 0; i < recipeDivs.length; i++) {
+        recipeDivs[i].dataset.index = i.toString();
+        if (recipeDivs[i].dataset.index == index) {
+            recipeDivs[i].classList.add('favorite-recipe');
+        }
+    }
+}
