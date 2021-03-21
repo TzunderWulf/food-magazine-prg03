@@ -57,7 +57,7 @@ function init() {
     let toggleFavorites = document.getElementsByClassName('favorite-btn');
 
     // We can use the same for loop for both elements, every recipe
-    // will always have to have two buttons
+    // will always have to have two buttons.
     for (let i = 0; i < buttonsRecipes.length; i++) {
         buttonsRecipes[i].dataset.index = i.toString();
         toggleFavorites[i].dataset.index = i.toString();
@@ -93,7 +93,7 @@ function clickHandler(e) {
 
 // showRecipe, shows the recipe and tags in detailview
 function showRecipe(e) {
-    // Get the button and id, for the right information
+    // Get the button and id, for the right information.
     btn = e.target;
     btnIndex = btn.dataset.index;
 
@@ -125,13 +125,13 @@ function deleteFavorite(e) {
     storedData = JSON.parse(storedString);
 
     // Get index of the index of the item we want to remove
-    // within the array
+    // within the array.
     let index = storedData.indexOf(btnIndex);
 
-    // Remove the index
+    // Remove the index.
     storedData.splice(index, index + 1);
 
-    // Update the storage
+    // Update the storage.
     localStorage.setItem('favorites', JSON.stringify(storedData));
 }
 
@@ -139,6 +139,7 @@ function deleteFavorite(e) {
 function fillFromStorage(index) {
     let recipeDivs = document.getElementsByClassName('recipe');
 
+    // For every div check if the index is found in the localstorage.
     for (let i = 0; i < recipeDivs.length; i++) {
         recipeDivs[i].dataset.index = i.toString();
         if (recipeDivs[i].dataset.index == index) {
