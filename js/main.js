@@ -121,11 +121,18 @@ function deleteFavorite(e) {
     recipeDiv = btn.parentNode;
     recipeDiv.classList.remove('favorite-recipe');
 
-    // get item
-    // parse list from localstorage
-    // remove item with slice
-    // remake json
-    // set item
+    storedString = localStorage.getItem('favorites');
+    storedData = JSON.parse(storedString);
+
+    // Get index of the index of the item we want to remove
+    // within the array
+    let index = storedData.indexOf(btnIndex);
+
+    // Remove the index
+    storedData.splice(index, index + 1);
+
+    // Update the storage
+    localStorage.setItem('favorites', JSON.stringify(storedData));
 }
 
 // fillFromStorage, fill in from the localstorage
