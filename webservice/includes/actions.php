@@ -9,51 +9,61 @@ function getDishes()
             "id" => 1,
             "name" => "Pizza",
             "kitchen" => "Italian",
+            "searchtag" => "pizza"
         ],
         [
             "id" => 2,
             "name" => "Mac & Cheese",
             "kitchen" => "American",
+            "searchtag" => "mac and cheese"
         ],
         [
             "id" => 3,
             "name" => "Noodles",
             "kitchen" => "Japanese",
+            "searchtag" => "noodles"
         ],
         [
             "id" => 4,
             "name" => "Kapsalon",
             "kitchen" => "Dutch",
+            "searchtag" => "shawarma"
         ],
         [
             "id" => 5,
             "name" => "Paella",
             "kitchen" => "Spanish",
+            "searchtag" => "paella"
         ],
         [
             "id" => 6,
             "name" => "Sushi",
             "kitchen" => "Japanese",
+            "searchtag" => "sushi"
         ],
         [
             "id" => 7,
             "name" => "Gyros",
             "kitchen" => "Greek",
+            "searchtag" => "gyros"
         ],
         [
             "id" => 8,
             "name" => "Lasagna",
             "kitchen" => "Italian",
+            "searchtag" => "lasagna"
         ],
         [
             "id" => 9,
             "name" => "Curryworst",
             "kitchen" => "German",
+            "searchtag" => "currywurst"
         ],
         [
             "id" => 10,
             "name" => "блины",
             "kitchen" => "Russian",
+            "searchtag" => "pancakes"
         ]
     ];
 }

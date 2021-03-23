@@ -153,7 +153,8 @@ function getDataSuccess(data) {
 
         const img = document.createElement('img');
         img.classList.add('image-recipe');
-        img.setAttribute('alt', item.name)
+        img.setAttribute('src', `https://source.unsplash.com/1300x900?${item.searchtag}`)
+        img.setAttribute('alt', item.name);
         recipeDiv.appendChild(img);
 
         fillInFromLocalstorage(recipeDiv);
@@ -176,7 +177,26 @@ function getDataSuccess(data) {
     }
 }
 
-// Function getDataFail, if it doesn't get data, give an error message back.
+/*
+    Function getDataFail, if it doesn't get data, give an error message back.
+    As fun detail, it gives back a random cat image.
+*/
 function getDataFail(data) {
+    const errorDiv = document.createElement('div');
+    errorDiv.classList.add('error');
 
+    const errorMessage = document.createElement('h1');
+    errorMessage.innerText = 'Sad noises, API is broken.';
+
+    let errorImg = document.createElement('img');
+    errorImg.classList.add('error-picture');
+    fetch('https://aws.random.cat/meow')
+        .then(response => response.json())
+        .then(data => {
+            errorImg.setAttribute('src', data.file);
+        });
+    
+    errorDiv.appendChild(errorMessage);
+    errorDiv.appendChild(errorImg);
+    recipes.appendChild(errorDiv);
 }

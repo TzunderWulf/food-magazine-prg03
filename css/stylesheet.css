@@ -46,7 +46,7 @@ h2 {
 }
 
 #recipes {
-    max-width: 700px;
+    width: 700px;
 
     display: flex;
     flex-flow: row wrap;
@@ -92,6 +92,17 @@ h2 {
     font-weight: bold;
 
     cursor: pointer;
+}
+
+.error {
+    max-width: 500px;
+    color: red;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.error-picture {
+   width: 400px;
 }
 
 /* @media for tablet screens */
