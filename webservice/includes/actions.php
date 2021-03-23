@@ -67,43 +67,43 @@ function getDishDetails($id)
     $tags = [
         1 => [
             "recipe" => "Put it in the oven and go!",
-            "tags" => ['cheese', 'oven']
+            "tags" => ['cheese', ' oven']
         ],
         2 => [
             "recipe" => "Cheesy Macaroni, straight out of the oven!",
-            "tags" => ['cheese', 'oven', 'mac']
+            "tags" => ['cheese', ' oven', ' mac']
         ],
         3 => [
             "recipe" => "Available for self-cooking or as an instant.",
-            "tags" => ['omnomnom', 'noodles', 'instant']
+            "tags" => ['omnomnom', ' noodles', ' instant']
         ],
         4 => [
             "recipe" => "Everytime in the city after midnight",
-            "tags" => ['kapsalon', 'tasty', 'meat']
+            "tags" => ['kapsalon', ' tasty', ' meat']
         ],
         5 => [
             "recipe" => "Specialty when on holiday in Spain",
-            "tags" => ['fish', 'rice']
+            "tags" => ['fish', ' rice']
         ],
         6 => [
             "recipe" => "Order or make it yourself!",
-            "tags" => ['fish', 'seaweed', 'food']
+            "tags" => ['fish', ' seaweed', ' food']
         ],
         7 => [
             "recipe" => "Meat (pork or chicken) served with potato, onion, tomato, tzatziki or yogurt!",
-            "tags" => ['meat', 'fresh vegetables', 'pork', 'chicken']
+            "tags" => ['meat', ' fresh vegetables', ' pork', ' chicken']
         ],
         8 => [
             "recipe" => "Straight out of heaven.",
-            "tags" => ['omnomnom', 'cheese', 'oven']
+            "tags" => ['omnomnom', ' cheese', ' oven']
         ],
         9 => [
             "recipe" => "Famous in Berlin, lovely to eat.",
-            "tags" => ['bread', 'potato', 'tasty', 'meat']
+            "tags" => ['bread', ' potato', ' tasty', ' meat']
         ],
         10 => [
             "recipe" => "Цыка блять, советы идут",
-            "tags" => ['pancake', 'savory', 'sweet']
+            "tags" => ['pancake', ' savory', ' sweet']
         ]
     ];
 
