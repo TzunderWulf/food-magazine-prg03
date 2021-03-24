@@ -1,15 +1,14 @@
-html,
-body {
+html, body  {
     width: 100%;
     height: 100%;
 
     margin: 0;
 
-    font-family: 'Times New Roman', Times, serif ;
+    font-family: 'Times New Roman', Times, serif;
 }
 
 header {
-    padding: 20px 0;
+    padding: 10px 0;
 
     text-align: center;
 
@@ -20,24 +19,18 @@ header {
 }
 
 main {
-    display: flex;
-    flex-flow: row nowrap;
-
-    max-width: 1000px;
+    padding: 10px;
     margin: auto;
 }
 
 #detail-view {
     background-color: #e6e6e6;
-    flex-grow: 1;
-    height: 1000px;
 
-    padding: 10px 20px;
-
+    padding: 10px;
     margin: 10px 0;
 }
 
-#recipe, #tags {
+#show-recipe, #show-tags {
     font-family: sans-serif;
 }
 
@@ -46,25 +39,17 @@ h2 {
 }
 
 #recipes {
-    width: 700px;
+    max-width: 100%;
 
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: space-evenly;
-
-    margin-bottom: 5vh;
+    padding: 10px;
 }
 
+/* All styling for within each recipe */
 .recipe {
     border: 1px solid #E6E6E6;
-    min-width: 40%;
 
     padding: 5px 20px;
     margin: 10px 0;
-}
-
-.favorite-recipe {
-    background-color: #fdfcb3;
 }
 
 .title-recipe {
@@ -73,8 +58,7 @@ h2 {
 }
 
 .image-recipe {
-    width: 290px;
-    height: 200px;
+    max-width: 100%;
 }
 
 .standard-btn {
@@ -95,46 +79,55 @@ h2 {
 }
 
 .error {
-    max-width: 500px;
+    max-width: 100%;
+
     color: red;
-    margin: 0 auto;
+
     text-align: center;
 }
 
 .error-picture {
-   width: 400px;
+    max-width: 100%;
+}
+
+/* Class for favorited recipes, is added in JS */
+.favorite-recipe {
+    background-color: #fdfcb3;
 }
 
 /* @media for tablet screens */
+@media (min-width: 720px) {
+    #recipes {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-evenly;
+    }
 
-@media (max-width: 720px) {
-    main {
-        flex-direction: column;
-        align-items: center;
-        padding: 10px;
+    .recipe {
+        max-width: 40%;
     }
 
     #detail-view {
-        height: fit-content;
-        width: 80%;
-    }
-
-    #recipes {
-        margin-bottom: 0;
+        margin: 0 25px;
     }
 }
 
-@media (max-width: 1023px) {
+/* @media for laptop and desktop screens */
+@media (min-width: 1020px) {
     main {
-        flex-direction: column;
-        align-items: center;
-        padding: 10px;
+        display: flex;
+        flex-direction: row;
+
+        max-width: 70%;
+        
+        margin: auto;
     }
-    #detail-view {
-        height: fit-content;
-        width: 80%;
-    }
+    
     #recipes {
-        margin-bottom: 0;
+        max-width: 75%;
+    }
+
+    #detail-view {
+        min-width: 25%;
     }
 }
