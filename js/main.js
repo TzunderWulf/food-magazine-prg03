@@ -28,12 +28,11 @@ function init() {
     Function clickHandler, to check what needs to be executed, when
     one of the two buttons is pressed.
 */
-let clickHandler = e => {
+function clickHandler (e) {
     if (e.target.nodeName !== 'BUTTON') {
         return;
     } else if (e.target.classList.contains('favorite-btn')) {
         if (e.target.parentNode.classList.contains('favorite-recipe')) {
-            console.log('remove')
             removeFromFavorites(e);
         } else {
             addToFavorite(e);
@@ -47,7 +46,7 @@ let clickHandler = e => {
     Function showRecipe, when the recipe button is clicked, show the
     recipe in the detail view (aside element)
 */
-let showRecipe = e => {
+function showRecipe (e) {
     btn = e.target;
     btnId = btn.dataset.id;
     webserviceURL = `webservice/index.php?id=${btnId}`;
@@ -70,7 +69,7 @@ let showRecipe = e => {
     Once clicked, changes text within the button to "remove from 
     favorites".
 */
-let addToFavorite = e => {
+function addToFavorite (e) {
     btn = e.target;
     btnId = btn.dataset.id;
     btn.innerText = 'Remove from favorites';
@@ -86,7 +85,7 @@ let addToFavorite = e => {
     again, we then remove it from localstorage and the class. We also
     reset the text within the button to "Add to favorites". 
 */
-let removeFromFavorites = e => {
+function removeFromFavorites (e) {
     btn = e.target;
     btnId = btn.dataset.id;
     btn.innerText = 'Add to favorites';
@@ -113,7 +112,7 @@ let removeFromFavorites = e => {
     Function fillInFromLocalstorage, once the page is reloaded, we want
     our favorites to be returned and given the class.
 */
-let fillInFromLocalstorage = div => {
+function fillInFromLocalstorage (div) {
     storedString = localStorage.getItem('favorites');
     if (storedString != undefined) {
         storedData = JSON.parse(storedString);
@@ -138,7 +137,7 @@ function getData() {
 }
 
 // Function getDataSuccess, if its a success we then create the elements.
-let getDataSuccess = data => {
+function getDataSuccess (data) {
     for (let item of data) {
         // Create all elements to put in information
         const recipeDiv = document.createElement('div');
@@ -181,7 +180,7 @@ let getDataSuccess = data => {
     Function getDataFail, if it doesn't get data, give an error message back.
     As fun detail, it gives back a random cat image.
 */
-let getDataFail = data => {
+function getDataFail (data) {
     const errorDiv = document.createElement('div');
     errorDiv.classList.add('error');
 
