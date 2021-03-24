@@ -6,7 +6,7 @@ let webserviceURL; let btn; let btnId; let btnParent; let storedString; let stor
 let favorites = [];
 
 function init() {
-    getData();
+    getData(); // Fetch the data from the webservice
 
     recipes.addEventListener('click', clickHandler);
     
@@ -19,7 +19,7 @@ function init() {
     if (storedString != undefined) {
         storedData = JSON.parse(storedString);
         for (let favorite of storedData) {
-            favorites.push(favorite)
+            favorites.push(favorite);
         }
     }
 }
@@ -54,7 +54,6 @@ function showRecipe (e) {
     fetch(webserviceURL)
         .then(response => response.json())
         .then(data => {
-            console.log(data);
             let recipe = document.getElementById('show-recipe');
             recipe.innerText = data.recipe;
 
@@ -160,11 +159,14 @@ function getDataSuccess (data) {
 
         const favoriteBtn = document.createElement('button');
         favoriteBtn.classList.add('standard-btn', 'favorite-btn');
+
+        // Check what needs to be said in button
         if (recipeDiv.classList.contains('favorite-recipe')) {
             favoriteBtn.innerText = 'Remove from favorites';
         } else {
             favoriteBtn.innerText = 'Add to favorites';
         }
+
         favoriteBtn.dataset.id = item.id;
         recipeDiv.appendChild(favoriteBtn);
 
