@@ -100,8 +100,8 @@ function removeFromFavorites (e) {
     let favoritesArrayIndex = favorites.indexOf(btnId);
 
     // Remove from the array (storedData) and the favorites array
-    storedData.splice(storedArrayIndex, storedArrayIndex + 1);
-    favorites.splice(favoritesArrayIndex, favoritesArrayIndex + 1);
+    storedData.splice(storedArrayIndex, storedArrayIndex);
+    favorites.splice(favoritesArrayIndex, favoritesArrayIndex);
 
     // Update the storage (reset it)
     localStorage.setItem('favorites', JSON.stringify(storedData));
@@ -180,7 +180,7 @@ function getDataSuccess (data) {
 
 /*
     Function getDataFail, if it doesn't get data, give an error message back.
-    As fun detail, it gives back a random cat image.
+    As a fun detail, it gives back a random cat image.
 */
 function getDataFail (data) {
     const errorDiv = document.createElement('div');
