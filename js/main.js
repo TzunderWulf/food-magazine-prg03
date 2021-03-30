@@ -1,7 +1,6 @@
-// Add eventlistener to start functions, after window is loaded.
 window.addEventListener('load', init);
 
-const recipes = document.getElementById('recipes'); // Section housing the dishes
+const recipes = document.getElementById('recipes');
 let webserviceURL; let btn; let btnId; let btnParent; let storedString; let storedData;
 let favorites = [];
 
@@ -44,12 +43,13 @@ function clickHandler (e) {
 
 /*
     Function showRecipe, when the recipe button is clicked, show the
-    recipe in the detail view (aside element)
+    recipe in the detail view (aside element).
 */
 function showRecipe (e) {
     btn = e.target;
     btnId = btn.dataset.id;
-    webserviceURL = `webservice/index.php?id=${btnId}`;
+
+    webserviceURL = `webservice/index.php?id=${btnId}`; // Fetch specific info from recipe
 
     fetch(webserviceURL)
         .then(response => response.json())
@@ -59,7 +59,8 @@ function showRecipe (e) {
 
             let tags = document.getElementById('show-tags');
             tags.innerText = data.tags;
-        });
+        })
+        .catch(AJAXFail);
 }
 
 /*
@@ -72,6 +73,7 @@ function addToFavorite (e) {
     btn = e.target;
     btnId = btn.dataset.id;
     btn.innerText = 'Remove from favorites';
+
     btnParent = btn.parentNode;
     btnParent.classList.add('favorite-recipe');
 
@@ -132,10 +134,10 @@ function getData() {
     fetch(webserviceURL)
         .then(response => response.json())
         .then(getDataSuccess)
-        .catch(getDataFail)
+        .catch(AJAXFail)
 }
 
-// Function getDataSuccess, if its a success we then create the elements.
+// Function getDataSuccess, if its a success we then create the elements for each data item.
 function getDataSuccess (data) {
     for (let item of data) {
         // Create all elements to put in information
@@ -146,7 +148,7 @@ function getDataSuccess (data) {
 
         const title = document.createElement('h2');
         title.classList.add('title-recipe');
-        title.innerText = item.name; // Return the name of the object
+        title.innerText = item.name; 
         recipeDiv.appendChild(title);
 
         const img = document.createElement('img');
@@ -182,7 +184,7 @@ function getDataSuccess (data) {
     Function getDataFail, if it doesn't get data, give an error message back.
     As a fun detail, it gives back a random cat image.
 */
-function getDataFail (data) {
+function AJAXFail (data) {
     const errorDiv = document.createElement('div');
     errorDiv.classList.add('error');
 
