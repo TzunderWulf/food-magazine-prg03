@@ -61,7 +61,7 @@ h2 {
     max-width: 100%;
 }
 
-.standard-btn {
+.standard-button {
     display: block;
     width: 100%;
 
@@ -84,6 +84,7 @@ h2 {
     color: red;
 
     text-align: center;
+    margin: auto;
 }
 
 .error-picture {
@@ -117,8 +118,9 @@ h2 {
     main {
         display: flex;
         flex-direction: row;
+        justify-content: space-between;
 
-        max-width: 70%;
+        max-width: 1000px;
         
         margin: auto;
     }

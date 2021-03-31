@@ -1,18 +1,16 @@
 window.addEventListener('load', init);
 
 const recipes = document.getElementById('recipes');
-let webserviceURL; let btn; let btnId; let btnParent; let storedString; let storedData;
+let webserviceURL; let button; let buttonId; let buttonParent; let storedString; let storedData;
 let favorites = [];
 
 function init() {
-    getData(); // Fetch the data from the webservice
+    getDishesFromWebservice(); 
 
     recipes.addEventListener('click', clickHandler);
     
-    /*
-        Get old favorites and push them back into favorites array, so if you add
-        new favorites, you also get the old ones back when reloading.
-    */
+
+    // Get the old favorites, so if you add new ones, the old ones will not be removed
     storedString = localStorage.getItem('favorites');
 
     if (storedString != undefined) {
@@ -23,83 +21,87 @@ function init() {
     }
 }
 
-/* 
-    Function clickHandler, to check what needs to be executed, when
-    one of the two buttons is pressed.
-*/
+/** 
+ * Check what function has to be executed
+ * 
+ * @param e
+ */
 function clickHandler (e) {
     if (e.target.nodeName !== 'BUTTON') {
         return;
-    } else if (e.target.classList.contains('favorite-btn')) {
+    } else if (e.target.classList.contains('favorite-button')) {
         if (e.target.parentNode.classList.contains('favorite-recipe')) {
             removeFromFavorites(e);
         } else {
             addToFavorite(e);
         }
-    } else if (e.target.classList.contains('recipe-btn')) {
+    } else if (e.target.classList.contains('recipe-button')) {
         showRecipe(e);
     }
 }
 
-/*
-    Function showRecipe, when the recipe button is clicked, show the
-    recipe in the detail view (aside element).
-*/
+/** 
+ * When recipe button is clicked, make a fetch call to get recipe
+ * 
+ * @param e
+ */
 function showRecipe (e) {
-    btn = e.target;
-    btnId = btn.dataset.id;
+    button = e.target;
+    buttonId = button.dataset.id;
 
-    webserviceURL = `webservice/index.php?id=${btnId}`; // Fetch specific info from recipe
-
-    fetch(webserviceURL)
-        .then(response => response.json())
-        .then(data => {
-            let recipe = document.getElementById('show-recipe');
-            recipe.innerText = data.recipe;
-
-            let tags = document.getElementById('show-tags');
-            tags.innerText = data.tags;
-        })
-        .catch(AJAXFail);
+    ajaxRequest(`webservice/index.php?id=${buttonId}`, getRecipeSuccess)
 }
 
-/*
-    Function addToFavorite, when the favorite button is clicked, we
-    then add that to localstorage and give it a special class.
-    Once clicked, changes text within the button to "remove from 
-    favorites".
-*/
+/** 
+ * If fetch is succesfull, show recipe and tags in detailview
+ * 
+ * @param data
+ */
+function getRecipeSuccess(data) {
+    let recipe = document.getElementById('show-recipe');
+    recipe.innerText = data.recipe;
+
+    let tags = document.getElementById('show-tags');
+    tags.innerText = data.tags;
+}
+
+/** 
+ * When favorite button is clicked, add recipe to favorite
+ * 
+ * @param e
+ */
 function addToFavorite (e) {
-    btn = e.target;
-    btnId = btn.dataset.id;
-    btn.innerText = 'Remove from favorites';
+    button = e.target;
+    buttonId = button.dataset.id;
+    button.innerText = 'Remove from favorites';
 
-    btnParent = btn.parentNode;
-    btnParent.classList.add('favorite-recipe');
+    buttonParent = button.parentNode;
+    buttonParent.classList.add('favorite-recipe');
 
-    favorites.push(btnId);
+    favorites.push(buttonId);
     localStorage.setItem('favorites', JSON.stringify(favorites));
 }
 
-/*
-    Function removeFromFavorites, when the favorite button is clicked 
-    again, we then remove it from localstorage and the class. We also
-    reset the text within the button to "Add to favorites". 
-*/
+/** 
+ * When favorite button is clicked, when already a favorite
+ * remove from favorites
+ * 
+ * @param e
+ */
 function removeFromFavorites (e) {
-    btn = e.target;
-    btnId = btn.dataset.id;
-    btn.innerText = 'Add to favorites';
-    btnParent = btn.parentNode;
-    btnParent.classList.remove('favorite-recipe');
+    button = e.target;
+    buttonId = button.dataset.id;
+    button.innerText = 'Add to favorites';
+    buttonParent = button.parentNode;
+    buttonParent.classList.remove('favorite-recipe');
 
     // Get the data and parse it
     storedString = localStorage.getItem('favorites');
     storedData = JSON.parse(storedString);
 
     // Get the index of the item in the array
-    let storedArrayIndex = storedData.indexOf(btnId);
-    let favoritesArrayIndex = favorites.indexOf(btnId);
+    let storedArrayIndex = storedData.indexOf(buttonId);
+    let favoritesArrayIndex = favorites.indexOf(buttonId);
 
     // Remove from the array (storedData) and the favorites array
     storedData.splice(storedArrayIndex, storedArrayIndex);
@@ -109,10 +111,11 @@ function removeFromFavorites (e) {
     localStorage.setItem('favorites', JSON.stringify(storedData));
 }
 
-/*
-    Function fillInFromLocalstorage, once the page is reloaded, we want
-    our favorites to be returned and given the class.
-*/
+/** 
+ * Get the old favorites back from localstorage
+ * 
+ * @param div
+ */
 function fillInFromLocalstorage (div) {
     storedString = localStorage.getItem('favorites');
     if (storedString != undefined) {
@@ -125,20 +128,20 @@ function fillInFromLocalstorage (div) {
     }
 }
 
-/*
-    Function getData, once the page loads, get the data and print it to
-    the page (creating tags) if succesfull. If not give a error.
-*/
-function getData() {
-    webserviceURL = 'webservice/index.php';
-    fetch(webserviceURL)
-        .then(response => response.json())
-        .then(getDataSuccess)
-        .catch(AJAXFail)
+/** 
+ * Get the dishes from local webservice
+ */
+function getDishesFromWebservice() {
+    ajaxRequest('webservice/index.php', showDishes)
 }
 
-// Function getDataSuccess, if its a success we then create the elements for each data item.
-function getDataSuccess (data) {
+/** 
+ * If fetching the dishes is a succes, show the data
+ * per item
+ * 
+ * @param data
+ */
+function showDishes(data) {
     for (let item of data) {
         // Create all elements to put in information
         const recipeDiv = document.createElement('div');
@@ -160,7 +163,7 @@ function getDataSuccess (data) {
         fillInFromLocalstorage(recipeDiv);
 
         const favoriteBtn = document.createElement('button');
-        favoriteBtn.classList.add('standard-btn', 'favorite-btn');
+        favoriteBtn.classList.add('standard-button', 'favorite-button');
 
         // Check what needs to be said in button
         if (recipeDiv.classList.contains('favorite-recipe')) {
@@ -173,18 +176,24 @@ function getDataSuccess (data) {
         recipeDiv.appendChild(favoriteBtn);
 
         const recipeBtn = document.createElement('button');
-        recipeBtn.classList.add('standard-btn', 'recipe-btn');
+        recipeBtn.classList.add('standard-button', 'recipe-button');
         recipeBtn.innerText = 'Show recipe';
         recipeBtn.dataset.id = item.id;
         recipeDiv.appendChild(recipeBtn);
     }
 }
 
-/*
-    Function getDataFail, if it doesn't get data, give an error message back.
-    As a fun detail, it gives back a random cat image.
-*/
+/** 
+ * If fetching the dishes is a fail, show a error message
+ * with an adorable cat picture/gif
+ * 
+ * @param data
+ */
 function AJAXFail (data) {
+    ajaxRequest('https://aws.random.cat/meow', createErrorMessage)
+}
+
+function createErrorMessage(data) {
     const errorDiv = document.createElement('div');
     errorDiv.classList.add('error');
 
@@ -193,13 +202,23 @@ function AJAXFail (data) {
 
     let errorImg = document.createElement('img');
     errorImg.classList.add('error-picture');
-    fetch('https://aws.random.cat/meow')
-        .then(response => response.json())
-        .then(data => {
-            errorImg.setAttribute('src', data.file);
-        });
-    
+    errorImg.setAttribute('src', data.file);
+
     errorDiv.appendChild(errorMessage);
     errorDiv.appendChild(errorImg);
     recipes.appendChild(errorDiv);
+}
+
+/** 
+ * Generic AJAX handler, to stop DRY
+ * 
+ * @param url
+ * @param successHandler
+ */
+function ajaxRequest(url, successHandler) {
+    webserviceURL = url;
+    fetch(webserviceURL)
+        .then(response => response.json())
+        .then(successHandler)
+        .catch(AJAXFail)
 }
