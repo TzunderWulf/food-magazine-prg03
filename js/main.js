@@ -10,7 +10,7 @@ function init() {
     recipes.addEventListener('click', clickHandler);
     
 
-    // Get the old favorites, so if you add new ones, the old ones will not be removed
+    // Get the old favorites, so if you add new ones, the old ones will not be removed.
     storedString = localStorage.getItem('favorites');
 
     if (storedString != undefined) {
@@ -22,7 +22,7 @@ function init() {
 }
 
 /** 
- * Check what function has to be executed
+ * Check what function has to be executed, after entire field is clicked.
  * 
  * @param e
  */
@@ -41,7 +41,7 @@ function clickHandler (e) {
 }
 
 /** 
- * When recipe button is clicked, make a fetch call to get recipe
+ * When recipe button is clicked, make a fetch call to get dish details.
  * 
  * @param e
  */
@@ -53,7 +53,7 @@ function showRecipe (e) {
 }
 
 /** 
- * If fetch is succesfull, show recipe and tags in detailview
+ * If fetch is succesfull, show recipe and tags in detailview.
  * 
  * @param data
  */
@@ -66,7 +66,7 @@ function getRecipeSuccess(data) {
 }
 
 /** 
- * When favorite button is clicked, add recipe to favorite
+ * When favorite button is clicked, add recipe to favorite.
  * 
  * @param e
  */
@@ -84,7 +84,7 @@ function addToFavorite (e) {
 
 /** 
  * When favorite button is clicked, when already a favorite
- * remove from favorites
+ * remove from favorites.
  * 
  * @param e
  */
@@ -112,7 +112,7 @@ function removeFromFavorites (e) {
 }
 
 /** 
- * Get the old favorites back from localstorage
+ * Get the old favorites back from localstorage.
  * 
  * @param div
  */
@@ -129,7 +129,7 @@ function fillInFromLocalstorage (div) {
 }
 
 /** 
- * Get the dishes from local webservice
+ * Get the dishes from local webservice.
  */
 function getDishesFromWebservice() {
     ajaxRequest('webservice/index.php', showDishes)
@@ -137,7 +137,7 @@ function getDishesFromWebservice() {
 
 /** 
  * If fetching the dishes is a succes, show the data
- * per item
+ * per item.
  * 
  * @param data
  */
@@ -185,7 +185,7 @@ function showDishes(data) {
 
 /** 
  * If fetching the dishes is a fail, show a error message
- * with an adorable cat picture/gif
+ * with an adorable cat picture/gif.
  * 
  * @param data
  */
@@ -210,7 +210,7 @@ function createErrorMessage(data) {
 }
 
 /** 
- * Generic AJAX handler, to stop DRY
+ * Generic AJAX handler, to stop DRY.
  * 
  * @param url
  * @param successHandler
